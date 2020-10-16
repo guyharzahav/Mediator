@@ -1,0 +1,15 @@
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator.csprojAssemblyReference.cache
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\MainWindow.g.cs
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\App.g.cs
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator_MarkupCompile.cache
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator_MarkupCompile.lref
+C:\Users\guyha\source\repos\Mediator\Mediator\bin\Debug\Mediator.exe.config
+C:\Users\guyha\source\repos\Mediator\Mediator\bin\Debug\Mediator.exe
+C:\Users\guyha\source\repos\Mediator\Mediator\bin\Debug\Mediator.pdb
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\MainWindow.baml
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator.g.resources
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator.Properties.Resources.resources
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator.csproj.GenerateResource.cache
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator.csproj.CoreCompileInputs.cache
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator.exe
+C:\Users\guyha\source\repos\Mediator\Mediator\obj\Debug\Mediator.pdb

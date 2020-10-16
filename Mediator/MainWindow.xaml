@@ -1,0 +1,93 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mediator"
+        xmlns:InterService="clr-namespace:Mediator.communication"
+        xmlns:KnowledgeService="clr-namespace:Mediator.KnowledgeService" xmlns:DataService="clr-namespace:Mediator.DataService" xmlns:local1="clr-namespace:Mediator.ViewModel" x:Class="Mediator.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="584.022" Width="1352.94" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="knowledgeItemViewSource" d:DesignSource="{d:DesignInstance {x:Type KnowledgeService:KnowledgeItem}, CreateList=True}"/>
+        <CollectionViewSource x:Key="dataPointViewSource" d:DesignSource="{d:DesignInstance {x:Type DataService:DataPoint}, CreateList=True}"/>
+        <CollectionViewSource x:Key="interValueViewSource" d:DesignSource="{d:DesignInstance {x:Type InterService:IntersectionValue}, CreateList=True}"/>
+    </Window.Resources>
+    <TabControl Margin="10,0,0,0">
+        <TabItem Header="Knowledge Items">
+            <DataGrid x:Name="knowledgeItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="0,10,2,3" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding Source={StaticResource knowledgeItemViewSource}}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="conceptTypeColumn" Binding="{Binding ConceptType}" Header="Concept Type" Width="SizeToHeader"/>
+                    <DataGridCheckBoxColumn x:Name="existsInEMRColumn" Binding="{Binding ExistsInEMR}" Header="Exists In EMR" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="goodAfterColumn" Binding="{Binding GoodAfter}" Header="Good After" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="goodBeforeColumn" Binding="{Binding GoodBefore}" Header="Good Before" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
+                    <DataGridCheckBoxColumn x:Name="isLogicOnlyColumn" Binding="{Binding IsLogicOnly}" Header="Is Logic Only" Width="SizeToHeader"/>
+                    <DataGridCheckBoxColumn x:Name="isOrdinalColumn" Binding="{Binding IsOrdinal}" Header="Is Ordinal" Width="SizeToHeader"/>
+                    <DataGridCheckBoxColumn x:Name="isTemporalColumn" Binding="{Binding IsTemporal}" Header="Is Temporal" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="kBIDColumn" Binding="{Binding KBID}" Header="KBID" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="kFNColumn" Binding="{Binding KFN}" Header="KFN" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="localPersistencyTimeUnitColumn" Binding="{Binding LocalPersistencyTimeUnit}" Header="Local Persistency Time Unit" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="logicTypeColumn" Binding="{Binding LogicType}" Header="Logic Type" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="mapLocationXColumn" Binding="{Binding MapLocationX}" Header="Map Location X" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="mapLocationYColumn" Binding="{Binding MapLocationY}" Header="Map Location Y" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="outputTypeColumn" Binding="{Binding OutputType}" Header="Output Type" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="outputUnitTypeColumn" Binding="{Binding OutputUnitType}" Header="Output Unit Type" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="persistancetTableTimeUnitColumn" Binding="{Binding PersistancetTableTimeUnit}" Header="Persistancet Table Time Unit" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="persistancetTableTypeColumn" Binding="{Binding PersistancetTableType}" Header="Persistancet Table Type" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="scaleMaxValueColumn" Binding="{Binding ScaleMaxValue}" Header="Scale Max Value" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="scaleMinValueColumn" Binding="{Binding ScaleMinValue}" Header="Scale Min Value" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="scaleTitleColumn" Binding="{Binding ScaleTitle}" Header="Scale Title" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="semiFormalColumn" Binding="{Binding SemiFormal}" Header="Semi Formal" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="serverIDColumn" Binding="{Binding ServerID}" Header="Server ID" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="sturcturedTextColumn" Binding="{Binding SturcturedText}" Header="Sturctured Text" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="SizeToHeader"/>
+                    <DataGridCheckBoxColumn x:Name="viewOnlyColumn" Binding="{Binding ViewOnly}" Header="View Only" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Data Points">
+            <DataGrid x:Name="dataPointDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource dataPointViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="98,0,951,0">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="endTimeColumn" Header="End Time" Width="SizeToHeader">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding EndTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="patientIDColumn" Binding="{Binding PatientID}" Header="Patient ID" Width="SizeToHeader"/>
+                    <DataGridTemplateColumn x:Name="startTimeColumn" Header="Start Time" Width="SizeToHeader">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding StartTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="valueColumn" Binding="{Binding Value}" Header="Value" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Intersection Values">
+            <DataGrid x:Name="intersectionValueDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource interValueViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="98,0,951,0">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="interEndTimeColumn" Header="End Time" Width="SizeToHeader">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding EndTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="interStartTimeColumn" Header="Start Time" Width="SizeToHeader">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding StartTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="interValueColumn" Binding="{Binding Value}" Header="Value" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+    </TabControl>
+</Window>

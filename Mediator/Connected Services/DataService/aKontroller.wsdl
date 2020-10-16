@@ -1,0 +1,1767 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="About">
+        <s:complexType />
+      </s:element>
+      <s:element name="AboutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AboutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectsShort">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProjectsShortResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectsShortResult" type="tns:ArrayOfVisitorsProjectShort" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfVisitorsProjectShort">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VisitorsProjectShort" nillable="true" type="tns:VisitorsProjectShort" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VisitorsProjectShort">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProjectID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProjectName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProjectsLong">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProjectsLongResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectsLongResult" type="tns:ArrayOfVisitorsProjectLong" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfVisitorsProjectLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VisitorsProjectLong" nillable="true" type="tns:VisitorsProjectLong" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VisitorsProjectLong">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:VisitorsProjectShort">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DBtype" type="tns:DBtype" />
+              <s:element minOccurs="0" maxOccurs="1" name="DBName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DBURL" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DBTableName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DBusername" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DBpassword" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PatientIDColumn" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StartTimeColumn" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EndTimeColumn" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ConceptNameColumn" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ValueColumn" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="KBID" type="s:long" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="DBtype">
+        <s:restriction base="s:string">
+          <s:enumeration value="SQLserver2008" />
+          <s:enumeration value="SQLserver2005" />
+          <s:enumeration value="ORACLE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetProjectByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectByIDResult" type="tns:VisitorsProjectLong" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Authenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AuthenticateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectPatients">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="tns:SelectPatientsQuery" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectPatientsQuery">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DemographicConstraintsRelations" type="tns:LogicRelations" />
+          <s:element minOccurs="0" maxOccurs="1" name="DemographicConstraints" type="tns:ArrayOfDemographicConstraint" />
+          <s:element minOccurs="1" maxOccurs="1" name="KBConstraintsRelations" type="tns:LogicRelations" />
+          <s:element minOccurs="0" maxOccurs="1" name="KBConstraints" type="tns:ArrayOfKBConstraint" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemporalPairwiseConstraints" type="tns:ArrayOfPairwiseConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="LogicRelations">
+        <s:restriction base="s:string">
+          <s:enumeration value="AND" />
+          <s:enumeration value="OR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfDemographicConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DemographicConstraint" nillable="true" type="tns:DemographicConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DemographicConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="demographicConcept" type="tns:ConceptKnowledge" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValueConstraintsRelations" type="tns:LogicRelations" />
+          <s:element minOccurs="0" maxOccurs="1" name="ValueConstraints" type="tns:ArrayOfNachmanValueConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConceptKnowledge">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OutputType" type="tns:nachmanOutputTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="States" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="nachmanOutputTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Numeric" />
+          <s:enumeration value="Symbolic" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfNachmanValueConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="nachmanValueConstraint" nillable="true" type="tns:nachmanValueConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="nachmanValueConstraint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="logicOperator" type="tns:nachmanLogicOperators" />
+          <s:element minOccurs="0" maxOccurs="1" name="symbolicValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="symbolicMinValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="symbolicMaxValue" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="numericMinValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="numericMaxValue" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="nachmanLogicOperators">
+        <s:restriction base="s:string">
+          <s:enumeration value="Equals" />
+          <s:enumeration value="NotEquals" />
+          <s:enumeration value="Greater" />
+          <s:enumeration value="GreaterOrEquals" />
+          <s:enumeration value="Smaller" />
+          <s:enumeration value="SmallerOrEquals" />
+          <s:enumeration value="Between" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfKBConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="KBConstraint" nillable="true" type="tns:KBConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KBConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ConceptKnowledge" type="tns:ConceptKnowledge" />
+          <s:element minOccurs="0" maxOccurs="1" name="componentAlias" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ValueConstraint" type="tns:nachmanValueConstraint" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimeConstraint" type="tns:TimeConstraint" />
+          <s:element minOccurs="0" maxOccurs="1" name="proportionConstraint" type="tns:ProportionConstraint" />
+          <s:element minOccurs="0" maxOccurs="1" name="statisticalConstraint" type="tns:StatisticalConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TimeConstraint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StartTimeAsRange" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTimeAsRange" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAbsTime" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartPoint" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EarliestStartPoint" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LatestStartPoint" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndPoint" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EarliestEndPoint" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LatestEndPoint" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferencePoint" type="tns:ConceptKnowledge" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReferencePositionNumber" type="tns:PositionNumberTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReferenceBoundaryPoint" type="tns:nachmanBoundaryPointTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelativeStartPoint" type="tns:NachmanTimeSpan" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelativeEarliestStartPoint" type="tns:NachmanTimeSpan" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelativeLatestStartPoint" type="tns:NachmanTimeSpan" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelativeEndPoint" type="tns:NachmanTimeSpan" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelativeEarliestEndPoint" type="tns:NachmanTimeSpan" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelativeLatestEndPoint" type="tns:NachmanTimeSpan" />
+          <s:element minOccurs="0" maxOccurs="1" name="DurationConstraitns" type="tns:DurationConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="PositionNumberTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="First" />
+          <s:enumeration value="Second" />
+          <s:enumeration value="Third" />
+          <s:enumeration value="Fourth" />
+          <s:enumeration value="Fifth" />
+          <s:enumeration value="Last" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="nachmanBoundaryPointTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Start" />
+          <s:enumeration value="End" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="NachmanTimeSpan">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="seconds" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="minutes" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="hours" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="days" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="month" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="years" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DurationConstraint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DurationTimeUnit" type="tns:TimeGranularityUnits" />
+          <s:element minOccurs="1" maxOccurs="1" name="minDuration" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="maxDuration" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TimeGranularityUnits">
+        <s:restriction base="s:string">
+          <s:enumeration value="Seconds" />
+          <s:enumeration value="Minutes" />
+          <s:enumeration value="Hours" />
+          <s:enumeration value="Days" />
+          <s:enumeration value="Weeks" />
+          <s:enumeration value="Months" />
+          <s:enumeration value="Years" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ProportionConstraint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="minThreshold" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="maxThreshold" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StatisticalConstraint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="subjectDataDelegateFunction" type="tns:RawDataDelegateFunction" />
+          <s:element minOccurs="1" maxOccurs="1" name="populationDataDelegateFunction" type="tns:RawDataDelegateFunction" />
+          <s:element minOccurs="1" maxOccurs="1" name="logicOperator" type="tns:nachmanLogicOperators" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RawDataDelegateFunction">
+        <s:restriction base="s:string">
+          <s:enumeration value="none" />
+          <s:enumeration value="Min" />
+          <s:enumeration value="Max" />
+          <s:enumeration value="Avg" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfPairwiseConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PairwiseConstraint" nillable="true" type="tns:PairwiseConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PairwiseConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="componentAliasA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="componentAliasB" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="boundaryPointA" type="tns:nachmanBoundaryPointTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="boundaryPointB" type="tns:nachmanBoundaryPointTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="Relation" type="tns:Relations" />
+          <s:element minOccurs="0" maxOccurs="1" name="Start_Start" type="tns:Gap" />
+          <s:element minOccurs="0" maxOccurs="1" name="Start_End" type="tns:Gap" />
+          <s:element minOccurs="0" maxOccurs="1" name="End_Start" type="tns:Gap" />
+          <s:element minOccurs="0" maxOccurs="1" name="End_End" type="tns:Gap" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Relations">
+        <s:restriction base="s:string">
+          <s:enumeration value="After" />
+          <s:enumeration value="Before" />
+          <s:enumeration value="Equals" />
+          <s:enumeration value="Meet" />
+          <s:enumeration value="Overlaps" />
+          <s:enumeration value="Starts" />
+          <s:enumeration value="Finishes" />
+          <s:enumeration value="Containts" />
+          <s:enumeration value="Custom" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Gap">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:nachmanLogicOperators" />
+          <s:element minOccurs="1" maxOccurs="1" name="timeUnit" type="tns:TimeGranularityUnits" />
+          <s:element minOccurs="1" maxOccurs="1" name="minDifference" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="maxDifference" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelectPatientsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectPatientsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllPatients">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllPatientsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllPatientsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOntologyTree">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOntologyTreeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOntologyTreeResult" type="tns:OntologyTreeNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OntologyTreeNode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="group" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isFolder" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KI" type="tns:KnowledgeItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sons" type="tns:ArrayOfOntologyTreeNode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KnowledgeItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ViewOnly" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ServerID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="KBID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SturcturedText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SemiFormal" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ConceptType" type="tns:ConceptTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocalPersistencyTimeUnit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GoodBefore" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GoodAfter" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Clippers" type="tns:ArrayOfClipperEvent" />
+          <s:element minOccurs="1" maxOccurs="1" name="OutputType" type="tns:OutputTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="OutputUnitType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OutputAllowedValues" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTemporal" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsOrdinal" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScaleTitle" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ScaleMinValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ScaleMaxValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsLogicOnly" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="KFN" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LogicType" type="tns:LogicTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemporalSemanticsData" type="tns:TemporalSemantics" />
+          <s:element minOccurs="0" maxOccurs="1" name="StandardTermsList" type="tns:ArrayOfStandardTerm" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExistsInEMR" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SynonymsList" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="NecessaryContextes" type="tns:ArrayOfLong" />
+          <s:element minOccurs="1" maxOccurs="1" name="PersistancetTableTimeUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="1" maxOccurs="1" name="PersistancetTableType" type="tns:PersistenceType" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateData" type="tns:KnowledgeItemState" />
+          <s:element minOccurs="0" maxOccurs="1" name="GradientTrendData" type="tns:KnowledgeItemGradientTrend" />
+          <s:element minOccurs="0" maxOccurs="1" name="RateData" type="tns:KnowledgeItemRate" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatternData" type="tns:KnowledgeItemPattern" />
+          <s:element minOccurs="0" maxOccurs="1" name="FunctionData" type="tns:KnowledgeItemFunction" />
+          <s:element minOccurs="0" maxOccurs="1" name="AbstractedFrom" type="tns:ArrayOfAbstractedFrom" />
+          <s:element minOccurs="1" maxOccurs="1" name="MapLocationX" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="MapLocationY" type="s:float" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ConceptTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="NotDefined" />
+          <s:enumeration value="Range" />
+          <s:enumeration value="Primitive" />
+          <s:enumeration value="Event" />
+          <s:enumeration value="Gradient" />
+          <s:enumeration value="State" />
+          <s:enumeration value="Rate" />
+          <s:enumeration value="Trend" />
+          <s:enumeration value="Context" />
+          <s:enumeration value="Pattern" />
+          <s:enumeration value="Function" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfClipperEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClipperEvent" nillable="true" type="tns:ClipperEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClipperEvent">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="KnowledgeItemID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Constraint" type="tns:ValueConstraint" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeGapUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="0" maxOccurs="1" name="UntilTimeGap" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UntilBoundaryPoint" type="tns:BoundaryPointTypes" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ValueConstraint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:LogicOperators" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaxValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FuzzyValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FuzzyMinValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FuzzyMaxValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="LogicOperators">
+        <s:restriction base="s:string">
+          <s:enumeration value="Equals" />
+          <s:enumeration value="NotEquals" />
+          <s:enumeration value="Greater" />
+          <s:enumeration value="GreaterOrEquals" />
+          <s:enumeration value="Smaller" />
+          <s:enumeration value="SmallerOrEquals" />
+          <s:enumeration value="Between" />
+          <s:enumeration value="NotBetween" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="TimeUnits">
+        <s:restriction base="s:string">
+          <s:enumeration value="Seconds" />
+          <s:enumeration value="Minutes" />
+          <s:enumeration value="Hours" />
+          <s:enumeration value="Days" />
+          <s:enumeration value="Weeks" />
+          <s:enumeration value="Months" />
+          <s:enumeration value="Years" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="BoundaryPointTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Start" />
+          <s:enumeration value="End" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="OutputTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Boolean" />
+          <s:enumeration value="Numeric" />
+          <s:enumeration value="Symbolic" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="LogicTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="AND" />
+          <s:enumeration value="OR" />
+          <s:enumeration value="KFN" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="TemporalSemantics">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Concenatable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DownwardHereditary" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpwardHereditary" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Gestalt" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Solid" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Forward" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Backward" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStandardTerm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StandardTerm" nillable="true" type="tns:StandardTerm" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StandardTerm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Vocabulary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CUI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreferredTerm" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="PersistenceType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Positive_Positive" />
+          <s:enumeration value="Negative_Negative" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="KnowledgeItemState">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StateSelectionCriteria" type="tns:StateSelectionCriterias" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="StateSelectionCriterias">
+        <s:restriction base="s:string">
+          <s:enumeration value="Min" />
+          <s:enumeration value="Max" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="KnowledgeItemGradientTrend">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GradientType" type="tns:GradientTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignificanceVariation" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="FuzzySignificanceVariation" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignificanceVariationTime" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignificanceVariationTimeUnits" type="tns:TimeUnits" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersistenceTableXmlGradTrendINC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersistenceTableXmlGradTrendDEC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersistenceTableXmlGradTrendSAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GradientTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Additive" />
+          <s:enumeration value="Relative" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="KnowledgeItemRate">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Boundary" type="tns:BoundaryInclusions" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimeInterval" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RateOutputs" type="tns:ArrayOfRateOutput" />
+          <s:element minOccurs="1" maxOccurs="1" name="RateValueFuzziness" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="BoundaryInclusions">
+        <s:restriction base="s:string">
+          <s:enumeration value="UpperBound" />
+          <s:enumeration value="LowerBound" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfRateOutput">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RateOutput" nillable="true" type="tns:RateOutput" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RateOutput">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Lower" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Upper" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersistanceTableXML" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KnowledgeItemPattern">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PairwiseConstraints" type="tns:ArrayOfPairwiseConstraints" />
+          <s:element minOccurs="0" maxOccurs="1" name="PeriodicConstraints" type="tns:PeriodicConstraints" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemporalConstraints" type="tns:PatternTimeConstraints" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersistanceTableXMLPattern" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPairwiseConstraints">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PairwiseConstraints" nillable="true" type="tns:PairwiseConstraints" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PairwiseConstraints">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KnowledgeElemetAliasA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KnowledgeElemetAliasB" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BoundaryPointA" type="tns:BoundaryPointTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="BoundaryPointB" type="tns:BoundaryPointTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinDifference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaxDifference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PeriodicConstraints">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TimeUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnvelopeMinDuration" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnvelopeMaxDuration" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinGap" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaxGap" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CalendarPeriodTime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CalendarPeriodUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="1" maxOccurs="1" name="CardinalityOperator" type="tns:LogicOperators" />
+          <s:element minOccurs="1" maxOccurs="1" name="CardinalityValue" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CardinalityMinValue" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CardinalityMaxValue" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemporalPeriods" type="tns:TemporalPeriodGroup" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValuePeriodicIntervalRelation" type="tns:PeriodicIntervalRelations" />
+          <s:element minOccurs="1" maxOccurs="1" name="DurationPeriodicIntervalRelation" type="tns:PeriodicIntervalRelations" />
+          <s:element minOccurs="1" maxOccurs="1" name="AbsoluteGapPeriodicIntervalRelation" type="tns:PeriodicIntervalRelations" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TemporalPeriodGroup">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LogicType" type="tns:LogicTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemporalPeriodConstraints" type="tns:ArrayOfTemporalPeriodConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTemporalPeriodConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TemporalPeriodConstraint" nillable="true" type="tns:TemporalPeriodConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TemporalPeriodConstraint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TemporalPeriodFunction" type="tns:TemporalPeriodFunctions" />
+          <s:element minOccurs="0" maxOccurs="1" name="Constraint" type="tns:ValueConstraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TemporalPeriodFunctions">
+        <s:restriction base="s:string">
+          <s:enumeration value="DayOfWeek" />
+          <s:enumeration value="HourOfDay" />
+          <s:enumeration value="DayOfMonth" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="PeriodicIntervalRelations">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="INC" />
+          <s:enumeration value="SAME" />
+          <s:enumeration value="DEC" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="PatternTimeConstraints">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TimeUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAbsolute" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartPointAfter" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartPointAfterFrom" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartPointAfterTo" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndPointBefore" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndPointBeforeFrom" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndPointBeforeTo" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartTimeDelta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartTimeDeltaFrom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartTimeDeltaTo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndTimeDelta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndTimeDeltaFrom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndTimeDeltaTo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReferanceConceptID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="RefencePositionNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinDurationValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaxDurationValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KnowledgeItemFunction">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsInternal" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="InternalFunctionBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExternalWebServiceUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExternalFunctionMethodName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersitenceTable" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAbstractedFrom">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AbstractedFrom" nillable="true" type="tns:AbstractedFrom" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AbstractedFrom">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AFID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AbstractedFromKnowledgeItemID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Constraint" type="tns:ValueConstraint" />
+          <s:element minOccurs="1" maxOccurs="1" name="FromTimeGapUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="0" maxOccurs="1" name="FromTimeGap" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FromBoundaryPoint" type="tns:BoundaryPointTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="UntilTimeGapUnit" type="tns:TimeUnits" />
+          <s:element minOccurs="0" maxOccurs="1" name="UntilTimeGap" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UntilBoundaryPoint" type="tns:BoundaryPointTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateValueMap" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersistanceTableXML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatternTemporalConstraints" type="tns:PatternTimeConstraints" />
+          <s:element minOccurs="0" maxOccurs="1" name="Alias" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOntologyTreeNode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OntologyTreeNode" nillable="true" type="tns:OntologyTreeNode" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDemographicConcepts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDemographicConceptsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDemographicConceptsResult" type="tns:ArrayOfKnowledgeItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfKnowledgeItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="KnowledgeItem" nillable="true" type="tns:KnowledgeItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReferenceConcepts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReferenceConceptsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReferenceConceptsResult" type="tns:ArrayOfKnowledgeItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetKnowledgeItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="kiID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetKnowledgeItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetKnowledgeItemResult" type="tns:KnowledgeItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataFromDAController">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="conceptID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="conceptName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="patientsIDs" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataFromDAControllerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataFromDAControllerResult" type="tns:ArrayOfDataPoint" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDataPoint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataPoint" nillable="true" type="tns:DataPoint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataPoint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PatientID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="conceptName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="patientsIDs" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataResult" type="tns:ArrayOfDataPoint" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataByConcept">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="conceptName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataByConceptResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataByConceptResult" type="tns:ArrayOfDataPoint" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfVisitorsProjectShort" nillable="true" type="tns:ArrayOfVisitorsProjectShort" />
+      <s:element name="ArrayOfVisitorsProjectLong" nillable="true" type="tns:ArrayOfVisitorsProjectLong" />
+      <s:element name="VisitorsProjectLong" nillable="true" type="tns:VisitorsProjectLong" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="OntologyTreeNode" nillable="true" type="tns:OntologyTreeNode" />
+      <s:element name="ArrayOfKnowledgeItem" nillable="true" type="tns:ArrayOfKnowledgeItem" />
+      <s:element name="KnowledgeItem" nillable="true" type="tns:KnowledgeItem" />
+      <s:element name="ArrayOfDataPoint" nillable="true" type="tns:ArrayOfDataPoint" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AboutSoapIn">
+    <wsdl:part name="parameters" element="tns:About" />
+  </wsdl:message>
+  <wsdl:message name="AboutSoapOut">
+    <wsdl:part name="parameters" element="tns:AboutResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsShortSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectsShort" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsShortSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectsShortResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsLongSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectsLong" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsLongSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectsLongResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectByID" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectPatientsSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectPatients" />
+  </wsdl:message>
+  <wsdl:message name="SelectPatientsSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectPatientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPatientsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllPatients" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPatientsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllPatientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOntologyTreeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOntologyTree" />
+  </wsdl:message>
+  <wsdl:message name="GetOntologyTreeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOntologyTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDemographicConceptsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDemographicConcepts" />
+  </wsdl:message>
+  <wsdl:message name="GetDemographicConceptsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDemographicConceptsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceConceptsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReferenceConcepts" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceConceptsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReferenceConceptsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetKnowledgeItemSoapIn">
+    <wsdl:part name="parameters" element="tns:GetKnowledgeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetKnowledgeItemSoapOut">
+    <wsdl:part name="parameters" element="tns:GetKnowledgeItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataFromDAControllerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataFromDAController" />
+  </wsdl:message>
+  <wsdl:message name="GetDataFromDAControllerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataFromDAControllerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataByConceptSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataByConcept" />
+  </wsdl:message>
+  <wsdl:message name="GetDataByConceptSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataByConceptResponse" />
+  </wsdl:message>
+  <wsdl:message name="AboutHttpGetIn" />
+  <wsdl:message name="AboutHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsShortHttpGetIn" />
+  <wsdl:message name="GetProjectsShortHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfVisitorsProjectShort" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsLongHttpGetIn" />
+  <wsdl:message name="GetProjectsLongHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfVisitorsProjectLong" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectByIDHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:VisitorsProjectLong" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPatientsHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPatientsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetOntologyTreeHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOntologyTreeHttpGetOut">
+    <wsdl:part name="Body" element="tns:OntologyTreeNode" />
+  </wsdl:message>
+  <wsdl:message name="GetDemographicConceptsHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDemographicConceptsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfKnowledgeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceConceptsHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceConceptsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfKnowledgeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetKnowledgeItemHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="kiID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetKnowledgeItemHttpGetOut">
+    <wsdl:part name="Body" element="tns:KnowledgeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetDataFromDAControllerHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="conceptID" type="s:string" />
+    <wsdl:part name="conceptName" type="s:string" />
+    <wsdl:part name="patientsIDs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataFromDAControllerHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:message name="GetDataHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="conceptName" type="s:string" />
+    <wsdl:part name="patientsIDs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:message name="GetDataByConceptHttpGetIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="conceptName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataByConceptHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:message name="AboutHttpPostIn" />
+  <wsdl:message name="AboutHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsShortHttpPostIn" />
+  <wsdl:message name="GetProjectsShortHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfVisitorsProjectShort" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsLongHttpPostIn" />
+  <wsdl:message name="GetProjectsLongHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfVisitorsProjectLong" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectByIDHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:VisitorsProjectLong" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPatientsHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPatientsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetOntologyTreeHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOntologyTreeHttpPostOut">
+    <wsdl:part name="Body" element="tns:OntologyTreeNode" />
+  </wsdl:message>
+  <wsdl:message name="GetDemographicConceptsHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDemographicConceptsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfKnowledgeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceConceptsHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceConceptsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfKnowledgeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetKnowledgeItemHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="kiID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetKnowledgeItemHttpPostOut">
+    <wsdl:part name="Body" element="tns:KnowledgeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetDataFromDAControllerHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="conceptID" type="s:string" />
+    <wsdl:part name="conceptName" type="s:string" />
+    <wsdl:part name="patientsIDs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataFromDAControllerHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:message name="GetDataHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="conceptName" type="s:string" />
+    <wsdl:part name="patientsIDs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:message name="GetDataByConceptHttpPostIn">
+    <wsdl:part name="projectID" type="s:string" />
+    <wsdl:part name="conceptName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataByConceptHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:portType name="aKontrollerSoap">
+    <wsdl:operation name="About">
+      <wsdl:input message="tns:AboutSoapIn" />
+      <wsdl:output message="tns:AboutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsShort">
+      <wsdl:input message="tns:GetProjectsShortSoapIn" />
+      <wsdl:output message="tns:GetProjectsShortSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsLong">
+      <wsdl:input message="tns:GetProjectsLongSoapIn" />
+      <wsdl:output message="tns:GetProjectsLongSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectByID">
+      <wsdl:input message="tns:GetProjectByIDSoapIn" />
+      <wsdl:output message="tns:GetProjectByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <wsdl:input message="tns:AuthenticateSoapIn" />
+      <wsdl:output message="tns:AuthenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectPatients">
+      <wsdl:input message="tns:SelectPatientsSoapIn" />
+      <wsdl:output message="tns:SelectPatientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <wsdl:input message="tns:GetAllPatientsSoapIn" />
+      <wsdl:output message="tns:GetAllPatientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOntologyTree">
+      <wsdl:input message="tns:GetOntologyTreeSoapIn" />
+      <wsdl:output message="tns:GetOntologyTreeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDemographicConcepts">
+      <wsdl:input message="tns:GetDemographicConceptsSoapIn" />
+      <wsdl:output message="tns:GetDemographicConceptsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceConcepts">
+      <wsdl:input message="tns:GetReferenceConceptsSoapIn" />
+      <wsdl:output message="tns:GetReferenceConceptsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledgeItem">
+      <wsdl:input message="tns:GetKnowledgeItemSoapIn" />
+      <wsdl:output message="tns:GetKnowledgeItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromDAController">
+      <wsdl:input message="tns:GetDataFromDAControllerSoapIn" />
+      <wsdl:output message="tns:GetDataFromDAControllerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <wsdl:input message="tns:GetDataSoapIn" />
+      <wsdl:output message="tns:GetDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByConcept">
+      <wsdl:input message="tns:GetDataByConceptSoapIn" />
+      <wsdl:output message="tns:GetDataByConceptSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="aKontrollerHttpGet">
+    <wsdl:operation name="About">
+      <wsdl:input message="tns:AboutHttpGetIn" />
+      <wsdl:output message="tns:AboutHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsShort">
+      <wsdl:input message="tns:GetProjectsShortHttpGetIn" />
+      <wsdl:output message="tns:GetProjectsShortHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsLong">
+      <wsdl:input message="tns:GetProjectsLongHttpGetIn" />
+      <wsdl:output message="tns:GetProjectsLongHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectByID">
+      <wsdl:input message="tns:GetProjectByIDHttpGetIn" />
+      <wsdl:output message="tns:GetProjectByIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <wsdl:input message="tns:AuthenticateHttpGetIn" />
+      <wsdl:output message="tns:AuthenticateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <wsdl:input message="tns:GetAllPatientsHttpGetIn" />
+      <wsdl:output message="tns:GetAllPatientsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOntologyTree">
+      <wsdl:input message="tns:GetOntologyTreeHttpGetIn" />
+      <wsdl:output message="tns:GetOntologyTreeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDemographicConcepts">
+      <wsdl:input message="tns:GetDemographicConceptsHttpGetIn" />
+      <wsdl:output message="tns:GetDemographicConceptsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceConcepts">
+      <wsdl:input message="tns:GetReferenceConceptsHttpGetIn" />
+      <wsdl:output message="tns:GetReferenceConceptsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledgeItem">
+      <wsdl:input message="tns:GetKnowledgeItemHttpGetIn" />
+      <wsdl:output message="tns:GetKnowledgeItemHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromDAController">
+      <wsdl:input message="tns:GetDataFromDAControllerHttpGetIn" />
+      <wsdl:output message="tns:GetDataFromDAControllerHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <wsdl:input message="tns:GetDataHttpGetIn" />
+      <wsdl:output message="tns:GetDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByConcept">
+      <wsdl:input message="tns:GetDataByConceptHttpGetIn" />
+      <wsdl:output message="tns:GetDataByConceptHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="aKontrollerHttpPost">
+    <wsdl:operation name="About">
+      <wsdl:input message="tns:AboutHttpPostIn" />
+      <wsdl:output message="tns:AboutHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsShort">
+      <wsdl:input message="tns:GetProjectsShortHttpPostIn" />
+      <wsdl:output message="tns:GetProjectsShortHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsLong">
+      <wsdl:input message="tns:GetProjectsLongHttpPostIn" />
+      <wsdl:output message="tns:GetProjectsLongHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectByID">
+      <wsdl:input message="tns:GetProjectByIDHttpPostIn" />
+      <wsdl:output message="tns:GetProjectByIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <wsdl:input message="tns:AuthenticateHttpPostIn" />
+      <wsdl:output message="tns:AuthenticateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <wsdl:input message="tns:GetAllPatientsHttpPostIn" />
+      <wsdl:output message="tns:GetAllPatientsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOntologyTree">
+      <wsdl:input message="tns:GetOntologyTreeHttpPostIn" />
+      <wsdl:output message="tns:GetOntologyTreeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDemographicConcepts">
+      <wsdl:input message="tns:GetDemographicConceptsHttpPostIn" />
+      <wsdl:output message="tns:GetDemographicConceptsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceConcepts">
+      <wsdl:input message="tns:GetReferenceConceptsHttpPostIn" />
+      <wsdl:output message="tns:GetReferenceConceptsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledgeItem">
+      <wsdl:input message="tns:GetKnowledgeItemHttpPostIn" />
+      <wsdl:output message="tns:GetKnowledgeItemHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromDAController">
+      <wsdl:input message="tns:GetDataFromDAControllerHttpPostIn" />
+      <wsdl:output message="tns:GetDataFromDAControllerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <wsdl:input message="tns:GetDataHttpPostIn" />
+      <wsdl:output message="tns:GetDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByConcept">
+      <wsdl:input message="tns:GetDataByConceptHttpPostIn" />
+      <wsdl:output message="tns:GetDataByConceptHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="aKontrollerSoap" type="tns:aKontrollerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="About">
+      <soap:operation soapAction="http://tempuri.org/About" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsShort">
+      <soap:operation soapAction="http://tempuri.org/GetProjectsShort" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsLong">
+      <soap:operation soapAction="http://tempuri.org/GetProjectsLong" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectByID">
+      <soap:operation soapAction="http://tempuri.org/GetProjectByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="http://tempuri.org/Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectPatients">
+      <soap:operation soapAction="http://tempuri.org/SelectPatients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <soap:operation soapAction="http://tempuri.org/GetAllPatients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOntologyTree">
+      <soap:operation soapAction="http://tempuri.org/GetOntologyTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDemographicConcepts">
+      <soap:operation soapAction="http://tempuri.org/GetDemographicConcepts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceConcepts">
+      <soap:operation soapAction="http://tempuri.org/GetReferenceConcepts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledgeItem">
+      <soap:operation soapAction="http://tempuri.org/GetKnowledgeItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromDAController">
+      <soap:operation soapAction="http://tempuri.org/GetDataFromDAController" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByConcept">
+      <soap:operation soapAction="http://tempuri.org/GetDataByConcept" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="aKontrollerSoap12" type="tns:aKontrollerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="About">
+      <soap12:operation soapAction="http://tempuri.org/About" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsShort">
+      <soap12:operation soapAction="http://tempuri.org/GetProjectsShort" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsLong">
+      <soap12:operation soapAction="http://tempuri.org/GetProjectsLong" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectByID">
+      <soap12:operation soapAction="http://tempuri.org/GetProjectByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <soap12:operation soapAction="http://tempuri.org/Authenticate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectPatients">
+      <soap12:operation soapAction="http://tempuri.org/SelectPatients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <soap12:operation soapAction="http://tempuri.org/GetAllPatients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOntologyTree">
+      <soap12:operation soapAction="http://tempuri.org/GetOntologyTree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDemographicConcepts">
+      <soap12:operation soapAction="http://tempuri.org/GetDemographicConcepts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceConcepts">
+      <soap12:operation soapAction="http://tempuri.org/GetReferenceConcepts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledgeItem">
+      <soap12:operation soapAction="http://tempuri.org/GetKnowledgeItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromDAController">
+      <soap12:operation soapAction="http://tempuri.org/GetDataFromDAController" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <soap12:operation soapAction="http://tempuri.org/GetData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByConcept">
+      <soap12:operation soapAction="http://tempuri.org/GetDataByConcept" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="aKontrollerHttpGet" type="tns:aKontrollerHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="About">
+      <http:operation location="/About" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsShort">
+      <http:operation location="/GetProjectsShort" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsLong">
+      <http:operation location="/GetProjectsLong" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectByID">
+      <http:operation location="/GetProjectByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <http:operation location="/Authenticate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <http:operation location="/GetAllPatients" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOntologyTree">
+      <http:operation location="/GetOntologyTree" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDemographicConcepts">
+      <http:operation location="/GetDemographicConcepts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceConcepts">
+      <http:operation location="/GetReferenceConcepts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledgeItem">
+      <http:operation location="/GetKnowledgeItem" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromDAController">
+      <http:operation location="/GetDataFromDAController" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <http:operation location="/GetData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByConcept">
+      <http:operation location="/GetDataByConcept" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="aKontrollerHttpPost" type="tns:aKontrollerHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="About">
+      <http:operation location="/About" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsShort">
+      <http:operation location="/GetProjectsShort" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsLong">
+      <http:operation location="/GetProjectsLong" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectByID">
+      <http:operation location="/GetProjectByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <http:operation location="/Authenticate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <http:operation location="/GetAllPatients" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOntologyTree">
+      <http:operation location="/GetOntologyTree" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDemographicConcepts">
+      <http:operation location="/GetDemographicConcepts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceConcepts">
+      <http:operation location="/GetReferenceConcepts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledgeItem">
+      <http:operation location="/GetKnowledgeItem" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromDAController">
+      <http:operation location="/GetDataFromDAController" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <http:operation location="/GetData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByConcept">
+      <http:operation location="/GetDataByConcept" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="aKontroller">
+    <wsdl:port name="aKontrollerSoap" binding="tns:aKontrollerSoap">
+      <soap:address location="http://dam.ise.bgu.ac.il/dime/aKontroller.asmx" />
+    </wsdl:port>
+    <wsdl:port name="aKontrollerSoap12" binding="tns:aKontrollerSoap12">
+      <soap12:address location="http://dam.ise.bgu.ac.il/dime/aKontroller.asmx" />
+    </wsdl:port>
+    <wsdl:port name="aKontrollerHttpGet" binding="tns:aKontrollerHttpGet">
+      <http:address location="http://dam.ise.bgu.ac.il/dime/aKontroller.asmx" />
+    </wsdl:port>
+    <wsdl:port name="aKontrollerHttpPost" binding="tns:aKontrollerHttpPost">
+      <http:address location="http://dam.ise.bgu.ac.il/dime/aKontroller.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
